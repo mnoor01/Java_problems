@@ -6,7 +6,8 @@ public class CheckList {
     public static LinkedListStack_queue myList= new LinkedListStack_queue();
 
     public static void main(String[] args) {
-        options();
+//        options();
+        System.out.println(sortByString("news","views"));
 
         // write your code here
     }
@@ -57,5 +58,15 @@ public class CheckList {
 
 
         } while (quitloop==0);
+    }
+    public static String sortByString(String s, String t){
+        String emptyString=" ";
+        for (int i = 0; i < t.length(); i++) {
+            String charString=String.valueOf(t.charAt(i));
+            if (s.contains(charString)){
+                emptyString+=charString;
+            }
+        }
+        return emptyString;
     }
 }

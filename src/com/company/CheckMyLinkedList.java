@@ -5,6 +5,7 @@ import jdk.nashorn.api.scripting.JSObject;
 
 import java.text.DecimalFormat;
 import java.util.*;
+import java.util.LinkedList;
 
 public class CheckMyLinkedList {
     public static MyLinkedList myLinkedList = new MyLinkedList();
@@ -273,8 +274,53 @@ public class CheckMyLinkedList {
         }
         return rBigDifference(num,smallest,largest,position+1);
     }
+    public static String sortByString(String s, String t){
+        if (s== null){
+            return " ";
+        }
+        if (t== null){
+            return " ";
+        }
+        StringBuilder sortedString= new StringBuilder();
+        Queue<Character> sortedByString= new LinkedList<>();
+
+        Map<Character, Integer> stringCharMap= new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char sChar= s.charAt(i);
+            if (stringCharMap.containsKey(sChar)) stringCharMap.put(sChar,stringCharMap.get(sChar));
+            else stringCharMap.put(sChar,1);
+        }
+        fillQueue(t,sortedByString);
+        while (!sortedByString.isEmpty()){
+            if (stringCharMap.containsKey(sortedByString.peek()) && stringCharMap.get(sortedByString.peek())>1){
+                sortedString.append(sortedByString.peek());
+                stringCharMap.put(sortedByString.peek(),stringCharMap.get(sortedByString.peek()));
+
+            }
+            else if (stringCharMap.containsKey(sortedByString.peek())){
+                sortedString.append(sortedByString.poll());
+            }
+            else {
+                sortedByString.poll();
+            }
+        }
+        return sortedString.toString();
+    }
+
+    private static void fillQueue(String t, Queue<Character> sortedByString) {
+        for (Character tChar :t.toCharArray()) {
+            sortedByString.add(tChar);
+
+        }
+    }
 
 }
+/*
+Question 1: Sort the letters in the string s by the order they occur in string t.
+You can assume t will not have repetitive characters.
+For s="weather" and t="therapyw",
+the output should be sortByString(s,t)="theeraw".
+ */
 /*
 Scenario
 You are working as a security expert for an online site, and have noticed an increasing amount of bot activity. You have been tasked with identifying and collecting bot activity.
